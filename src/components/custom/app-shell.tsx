@@ -133,8 +133,10 @@ export default function AppShell({ children }: AppShellProps) {
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton variant="default">
-                    <LogOut className="h-4 w-4" />
-                    <span>Sign Out</span>
+                    <Link href="/" className="flex items-center gap-2">
+                      <LogOut className="h-4 w-4" />
+                      <span>Sign Out</span>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>
