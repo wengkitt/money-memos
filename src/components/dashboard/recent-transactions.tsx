@@ -1,13 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import {
-  ChevronDown,
-  ChevronUp,
-  ArrowUpRight,
-  ArrowDownRight,
-  ArrowLeftRight,
-} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -23,18 +17,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { getCategoryById, getWalletById, transactions } from "@/data/mock-data";
 import { cn } from "@/lib/utils";
-import {
-  transactions,
-  wallets,
-  categories,
-  getWalletById,
-  getCategoryById,
-} from "@/data/mock-data";
-import { format } from "date-fns";
 import { Transaction } from "@/types";
+import { format } from "date-fns";
+import {
+  ArrowDownRight,
+  ArrowLeftRight,
+  ArrowUpRight,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
+import { useState } from "react";
 
 const TRANSACTIONS_PER_PAGE = 5;
 

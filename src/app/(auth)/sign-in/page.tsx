@@ -52,16 +52,16 @@ export default function SignInPage() {
 
   // Form submission handler
   async function onSubmit(values: SignInFormValues) {
-    const { data, error } = await authClient.signIn.email(
+    await authClient.signIn.email(
       {
         email: values.email,
         password: values.password,
       },
       {
-        onRequest: (ctx) => {
+        onRequest: () => {
           setIsLoading(true);
         },
-        onSuccess: (ctx) => {
+        onSuccess: () => {
           setIsLoading(false);
           toast.success("Sign in successful!");
           router.push("/dashboard");
@@ -154,7 +154,7 @@ export default function SignInPage() {
           </CardContent>
           <CardFooter className="flex flex-col items-center border-t pt-6 gap-2">
             <div className="text-center text-sm">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link href="/sign-up" className="text-primary hover:underline">
                 Sign up
               </Link>

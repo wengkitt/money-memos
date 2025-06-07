@@ -16,7 +16,6 @@ import {
   SidebarSeparator,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { auth } from "@/lib/auth";
 import { authClient } from "@/lib/client";
 import {
   LineChart,

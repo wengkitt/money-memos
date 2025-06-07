@@ -68,17 +68,17 @@ export default function SignUpPage() {
 
   // Form submission handler
   async function onSubmit(values: SignUpFormValues) {
-    const { data, error } = await authClient.signUp.email(
+    await authClient.signUp.email(
       {
         email: values.email,
         password: values.password,
         name: values.name,
       },
       {
-        onRequest: (ctx) => {
+        onRequest: () => {
           setIsLoading(true);
         },
-        onSuccess: (ctx) => {
+        onSuccess: () => {
           setIsLoading(false);
           toast.success("Account created successfully!");
           router.push("/sign-in");

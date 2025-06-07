@@ -1,25 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { TransactionTable } from "@/components/transaction";
 import { Button } from "@/components/ui/button";
-import {
-  Plus,
-  Filter,
-  ArrowUpDown,
-  DownloadCloud,
-  FileText,
-  SlidersHorizontal,
-} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { TransactionTable } from "@/components/transaction";
+import {
+  ArrowUpDown,
+  DownloadCloud,
+  FileText,
+  Filter,
+  Plus,
+  SlidersHorizontal,
+} from "lucide-react";
 
 export default function TransactionsPage() {
   return (
