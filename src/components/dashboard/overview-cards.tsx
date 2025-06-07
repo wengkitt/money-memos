@@ -1,17 +1,11 @@
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { DollarSign, TrendingUp, TrendingDown, Wallet } from "lucide-react";
-import { cn } from "@/lib/utils";
-import {
-  getMonthlyIncome,
   getMonthlyExpenses,
+  getMonthlyIncome,
   getTotalNetWorth,
 } from "@/data/mock-data";
+import { cn } from "@/lib/utils";
+import { DollarSign, TrendingDown, TrendingUp, Wallet } from "lucide-react";
 
 export function OverviewCards() {
   const netWorth = getTotalNetWorth();

@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
@@ -38,6 +39,7 @@ type SignInFormValues = z.infer<typeof signInSchema>;
 export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   // Initialize form
   const form = useForm<SignInFormValues>({
@@ -50,7 +52,27 @@ export default function SignInPage() {
 
   // Form submission handler
   async function onSubmit(values: SignInFormValues) {
-    console.log("Form submitted with values:", values);
+    await authClient.signIn.email(
+      {
+        email: values.email,
+        password: values.password,
+      },
+      {
+        onRequest: () => {
+          setIsLoading(true);
+        },
+        onSuccess: () => {
+          setIsLoading(false);
+          toast.success("Sign in successful!");
+          router.push("/dashboard");
+        },
+        onError: (ctx) => {
+          setIsLoading(false);
+          toast.error(`Sign in failed: ${ctx.error.message}`);
+          // display the error message
+        },
+      }
+    );
   }
 
   return (
@@ -132,7 +154,7 @@ export default function SignInPage() {
           </CardContent>
           <CardFooter className="flex flex-col items-center border-t pt-6 gap-2">
             <div className="text-center text-sm">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link href="/sign-up" className="text-primary hover:underline">
                 Sign up
               </Link>

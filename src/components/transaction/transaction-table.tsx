@@ -1,15 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { format } from "date-fns";
-import {
-  ArrowDownRight,
-  ArrowUpRight,
-  ArrowLeftRight,
-  ChevronDown,
-  Filter,
-  Search,
-} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -18,6 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -26,18 +19,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { getCategoryById, getWalletById, transactions } from "@/data/mock-data";
 import { cn } from "@/lib/utils";
-import {
-  transactions,
-  wallets,
-  categories,
-  getWalletById,
-  getCategoryById,
-} from "@/data/mock-data";
 import { Transaction } from "@/types";
+import { format } from "date-fns";
+import {
+  ArrowDownRight,
+  ArrowLeftRight,
+  ArrowUpRight,
+  ChevronDown,
+  Filter,
+  Search,
+} from "lucide-react";
+import { useState } from "react";
 
 export function TransactionTable() {
   const [searchQuery, setSearchQuery] = useState("");

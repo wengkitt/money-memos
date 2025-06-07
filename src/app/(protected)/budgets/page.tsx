@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Plus, Filter } from "lucide-react";
 import { BudgetCards } from "@/components/budget";
+import { Button } from "@/components/ui/button";
+import { Filter, Plus } from "lucide-react";
 
 export default function BudgetsPage() {
   return (

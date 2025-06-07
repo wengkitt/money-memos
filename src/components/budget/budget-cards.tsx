@@ -1,6 +1,7 @@
 "use client";
 
-import { formatDistanceToNow, format } from "date-fns";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,12 +11,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { MoreHorizontal, Edit, Trash2 } from "lucide-react";
-import { budgets, getCategoryById, getBudgetStatus } from "@/data/mock-data";
-import { Budget } from "@/types";
+import { budgets, getBudgetStatus, getCategoryById } from "@/data/mock-data";
 import { cn } from "@/lib/utils";
+import { Budget } from "@/types";
+import { format } from "date-fns";
+import { Edit, MoreHorizontal, Trash2 } from "lucide-react";
 
 export function BudgetCards() {
   return (
@@ -39,7 +39,6 @@ function BudgetCard({ budget }: { budget: Budget }) {
   const remaining = budget.amount - budget.spent;
   const startDate = new Date(budget.startDate);
   const endDate = new Date(budget.endDate);
-  const today = new Date();
 
   // Format date range
   const dateRange = `${format(startDate, "MMM d")} - ${format(
@@ -48,18 +47,18 @@ function BudgetCard({ budget }: { budget: Budget }) {
   )}`;
 
   // Determine progress bar color based on status
-  const getProgressColor = (status: string) => {
-    switch (status) {
-      case "on-track":
-        return "bg-emerald-600";
-      case "warning":
-        return "bg-amber-600";
-      case "over-budget":
-        return "bg-rose-600";
-      default:
-        return "";
-    }
-  };
+  // const getProgressColor = (status: string) => {
+  //   switch (status) {
+  //     case "on-track":
+  //       return "bg-emerald-600";
+  //     case "warning":
+  //       return "bg-amber-600";
+  //     case "over-budget":
+  //       return "bg-rose-600";
+  //     default:
+  //       return "";
+  //   }
+  // };
 
   // Badge for budget status
   const getStatusBadge = (status: string) => {

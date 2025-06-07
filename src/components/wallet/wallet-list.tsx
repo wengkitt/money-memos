@@ -1,8 +1,7 @@
 "use client";
 
-import { wallets, getTransactionsByWalletId } from "@/data/mock-data";
-import { formatDistanceToNow } from "date-fns";
-import { Wallet } from "@/types";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -11,19 +10,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { getTransactionsByWalletId, wallets } from "@/data/mock-data";
+import { Wallet } from "@/types";
+import { formatDistanceToNow } from "date-fns";
 import {
-  Edit,
-  Trash2,
-  CreditCard,
-  PiggyBank,
-  Landmark,
-  Briefcase,
   Banknote,
+  Briefcase,
+  CreditCard,
+  Edit,
+  Landmark,
   MoreHorizontal,
+  PiggyBank,
+  Trash2,
 } from "lucide-react";
-import { WalletTransactions } from "./wallet-transactions";
 
 export function WalletList() {
   const getWalletIcon = (type: string) => {

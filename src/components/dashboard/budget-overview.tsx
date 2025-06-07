@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -8,13 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import {
-  categories,
-  budgets,
-  getCategoryById,
-  getBudgetStatus,
-} from "@/data/mock-data";
+import { budgets, getBudgetStatus, getCategoryById } from "@/data/mock-data";
 import { Budget } from "@/types/budget";
 
 export function BudgetOverview() {
@@ -22,7 +17,9 @@ export function BudgetOverview() {
     <Card className="col-span-4 lg:col-span-1 transition-all duration-200 hover:shadow-md">
       <CardHeader>
         <CardTitle>Budget Overview</CardTitle>
-        <CardDescription>Your current month's budget progress</CardDescription>
+        <CardDescription>
+          Your current month&apos;s budget progress
+        </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         {budgets.map((budget) => (
