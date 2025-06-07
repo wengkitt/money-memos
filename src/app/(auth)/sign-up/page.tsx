@@ -27,6 +27,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/client";
 
 // Define form validation schema
 const signUpSchema = z
@@ -52,6 +53,7 @@ export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   // Initialize form
   const form = useForm<SignUpFormValues>({
@@ -66,7 +68,28 @@ export default function SignUpPage() {
 
   // Form submission handler
   async function onSubmit(values: SignUpFormValues) {
-    console.log("Form submitted with values:", values);
+    const { data, error } = await authClient.signUp.email(
+      {
+        email: values.email,
+        password: values.password,
+        name: values.name,
+      },
+      {
+        onRequest: (ctx) => {
+          setIsLoading(true);
+        },
+        onSuccess: (ctx) => {
+          setIsLoading(false);
+          toast.success("Account created successfully!");
+          router.push("/sign-in");
+        },
+        onError: (ctx) => {
+          setIsLoading(false);
+          toast.error(`Account creation failed: ${ctx.error.message}`);
+          // display the error message
+        },
+      }
+    );
   }
 
   return (

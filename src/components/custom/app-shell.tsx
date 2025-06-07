@@ -16,6 +16,8 @@ import {
   SidebarSeparator,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { auth } from "@/lib/auth";
+import { authClient } from "@/lib/client";
 import {
   LineChart,
   LogOut,
@@ -25,7 +27,7 @@ import {
   Wallet,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ReactNode } from "react";
 
 interface AppShellProps {
@@ -34,6 +36,17 @@ interface AppShellProps {
 
 export default function AppShell({ children }: AppShellProps) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  async function handleSignOut() {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/");
+        },
+      },
+    });
+  }
 
   return (
     <div className="relative flex min-h-screen flex-col">
@@ -132,11 +145,11 @@ export default function AppShell({ children }: AppShellProps) {
             <SidebarFooter>
               <SidebarMenu>
                 <SidebarMenuItem>
-                  <SidebarMenuButton variant="default">
-                    <Link href="/" className="flex items-center gap-2">
+                  <SidebarMenuButton variant="default" onClick={handleSignOut}>
+                    <div className="flex items-center gap-2">
                       <LogOut className="h-4 w-4" />
                       <span>Sign Out</span>
-                    </Link>
+                    </div>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>

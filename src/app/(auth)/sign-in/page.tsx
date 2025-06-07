@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
@@ -38,6 +39,7 @@ type SignInFormValues = z.infer<typeof signInSchema>;
 export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   // Initialize form
   const form = useForm<SignInFormValues>({
@@ -50,7 +52,27 @@ export default function SignInPage() {
 
   // Form submission handler
   async function onSubmit(values: SignInFormValues) {
-    console.log("Form submitted with values:", values);
+    const { data, error } = await authClient.signIn.email(
+      {
+        email: values.email,
+        password: values.password,
+      },
+      {
+        onRequest: (ctx) => {
+          setIsLoading(true);
+        },
+        onSuccess: (ctx) => {
+          setIsLoading(false);
+          toast.success("Sign in successful!");
+          router.push("/dashboard");
+        },
+        onError: (ctx) => {
+          setIsLoading(false);
+          toast.error(`Sign in failed: ${ctx.error.message}`);
+          // display the error message
+        },
+      }
+    );
   }
 
   return (
